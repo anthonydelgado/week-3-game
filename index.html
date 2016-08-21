@@ -4,15 +4,26 @@
 	<title>Hangman Game</title>
 </head>
 
+<!-- Bower CSS -->
+<link rel="stylesheet" type="text/css" href="bower_components/sweetalert/dist/sweetalert.css">
+<!-- Bower JS -->
+<script type="text/javascript" src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- Javascript -->
 <script type="text/javascript" src="assets/javascript/game.js"></script>
 
 <!-- Stylesheets -->
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 <body>
 
 <input onkeyup="onkeyup" type="text" name="" id="input">
 <div id="wordCount">Remaining Guess: 14</div>
+
+<div id="incorrectLettersGuessed">Incorrect Letters Guessed: </div>
+<div id="correctLettersGuessed">Correct Letters Guessed: </div>
+<!-- <div id="correctLettersDisplayed">Your Word: </div> -->
+
 
 
 </body>
