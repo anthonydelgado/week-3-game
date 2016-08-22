@@ -3,11 +3,15 @@
 	var wordsList = ["kitchen", "bedroom", "livingroom", "bathroom"];
 	var remainingGuesses = 14;
 	var lettersGuessed;
-	var cpWordChoice = wordsList[Math.floor(Math.random() * wordsList.length)];
 	var incorrectLetters = [];
+
+
+	var cpWordChoice = wordsList[Math.floor(Math.random() * wordsList.length)];
+	var chosenWord = cpWordChoice.split("");
+
+	var placeHolders= [];
 	var correctLetters = [];
-	var splitWord = cpWordChoice.split("");
-	
+
 	console.log(cpWordChoice);
 
 
@@ -17,13 +21,13 @@ var onkeyup = function(event) {
 
 
 	//checks if userLetterChoice matches any letters in cpWordChoice
-	var a = splitWord.indexOf(userLetterChoice);
-	console.log("Split Word [a]: ", splitWord[a])
+	var a = chosenWord.indexOf(userLetterChoice);
+	console.log("Chosen Word [a]: ", chosenWord[a])
 
 
 
 
-	if(typeof splitWord[a] === "undefined"){
+	if(typeof chosenWord[a] === "undefined"){
 
 		incorrectLetters.push(userLetterChoice); //pushes letter chosen into an array to be displayed
 		--remainingGuesses;
@@ -41,43 +45,49 @@ var onkeyup = function(event) {
 	} else{
 		
 
-		correctLetters.push(userLetterChoice);
-		console.log("Correct Letters:", correctLetters);
-		splitWord.splice(a,1, "_");
+		// correctLetters.push(userLetterChoice);
+		// console.log("Correct Letters:", correctLetters);
+		//chosenWord.splice(a,1, "_");
 
-		var placeHolders= []
-		for(var i=0; i<splitWord.length; i++){
 
+
+		for(var i=0; i<chosenWord.length; i++){
 			placeHolders[i] = "_";
+
+				if((userLetterChoice) === (chosenWord[a])){
+					//placeHolders[i] = chosenWord[a];
+					
+				}	
+		}	
+
 			
-		}
-		// for(var i=0; i<placeHolders.length; i++){
-		// 		placeHolders.splice(a,1, "$");
-		// 	}
+
+
+		
+
+
+
+			// correctLetters.push(userLetterChoice);
+			// console.log("Correct Letters:", correctLetters);
+
+
 
 
 			 console.log("Place Holders: ", placeHolders);
-			 console.log("SplitWord: ", splitWord);
+			 // console.log("chosenWord: ", chosenWord);
+			 console.log("-------");
 
-		// for(var i=0; i<placeHolders.length; i++){
-		//     placeHolders.splice(i, "*");
-		//     }
-
-		//placeHolders.splice("-");
-		//console.log("Place Holders:" ,placeHolders);
 
 		// var displayedHolders = document.getElementById("correctLettersDisplayed");	
 		// displayedHolders.innerHTML = "Your Word: " + placeHolders;
 		// console.log("Place Holders: ", placeHolders);
 
 
-		var displayedCorrectLetters = document.getElementById("correctLettersGuessed");
-		displayedCorrectLetters.innerHTML = "Correct Letters Guessed: " +splitWord;
+		// var displayedCorrectLetters = document.getElementById("correctLettersGuessed");
+		// displayedCorrectLetters.innerHTML = "Correct Letters Guessed: " +chosenWord;
 
 		//displays the correct guesses onto screen
 		// function correctGuesses(arr){
-
-		// 	splitWord.splice(a "_");
 
 		
 	}
@@ -87,7 +97,7 @@ var onkeyup = function(event) {
 		return;
 	}
 
-	if(splitWord.length === 0){
+	if(chosenWord.length === 0){
 		console.log("You Won");
 		return;
 	}
