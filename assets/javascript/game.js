@@ -1,107 +1,115 @@
 //Variables
 
-	var wordsList = ["kitchen", "bedroom", "livingroom", "bathroom"];
-	var remainingGuesses = 14;
-	var lettersGuessed;
-	var incorrectLetters = [];
+var wordsList = ["kitchen", "bedroom", "livingroom", "bathroom"];
+var remainingGuesses = 14;
+var lettersGuessed;
+var incorrectLetters = [];
 
 
-	var cpWordChoice = wordsList[Math.floor(Math.random() * wordsList.length)];
-	var chosenWord = cpWordChoice.split("");
+var cpWordChoice = '';
+var chosenWord = cpWordChoice.split("");
 
-	var placeHolders= [];
-	var correctLetters = [];
+var placeHolders = [];
+var correctLetters = [];
 
-	console.log(cpWordChoice);
+//select a random word from the list
+function newGame(){
 
+    cpWordChoice = wordsList[Math.floor(Math.random() * wordsList.length)];
+    console.log('new game word is now ' + cpWordChoice);
 
-var onkeyup = function(event) {
+    for (var i = 0; i < cpWordChoice.length; i++) {
+        placeHolders[i] = "_";
+    }
+    console.log('place holders is now ' + placeHolders);
 
-	var userLetterChoice = String.fromCharCode(event.keyCode).toLowerCase();
+}
+//Initialize a new game of hangman
+newGame();
 
+//replace the placeholder text
+function replacePlaceholder(letter, index) {
+    placeHolders[index] = letter;
+    console.log('place holders is now ' + placeHolders);
+}
+//text calling the place holder update function (delete me in production)
+replacePlaceholder('a', 2);
 
-	//checks if userLetterChoice matches any letters in cpWordChoice
-	var a = chosenWord.indexOf(userLetterChoice);
-	console.log("Chosen Word [a]: ", chosenWord[a])
+var onkeyup = function (event) {
 
-
-
-
-	if(typeof chosenWord[a] === "undefined"){
-
-		incorrectLetters.push(userLetterChoice); //pushes letter chosen into an array to be displayed
-		--remainingGuesses;
-		
-		//Displays how many chances users has left before user loses game
-		var counterHtml = document.getElementById("wordCount");
-		counterHtml.innerHTML = "Remaining Guesses: " + remainingGuesses;  
-
-		//Displays the letters user guessed that are incorrect
-		var displayedIncorrectLetters = document.getElementById("incorrectLettersGuessed");	
-		displayedIncorrectLetters.innerHTML = "Incorrect Letters Guesses: " + incorrectLetters;
-
-		console.log("Letters Guessed: ", incorrectLetters);
-		console.log("Remaining Guesses: ",remainingGuesses);
-	} else{
-		
-
-		// correctLetters.push(userLetterChoice);
-		// console.log("Correct Letters:", correctLetters);
-		//chosenWord.splice(a,1, "_");
+    var userLetterChoice = String.fromCharCode(event.keyCode).toLowerCase();
 
 
-
-		for(var i=0; i<chosenWord.length; i++){
-			placeHolders[i] = "_";
-
-				if((userLetterChoice) === (chosenWord[a])){
-					//placeHolders[i] = chosenWord[a];
-					
-				}	
-		}	
-
-			
+    //checks if userLetterChoice matches any letters in cpWordChoice
+    var a = chosenWord.indexOf(userLetterChoice);
+    console.log("Chosen Word [a]: ", chosenWord[a])
 
 
-		
+    if (typeof chosenWord[a] === "undefined") {
+
+        incorrectLetters.push(userLetterChoice); //pushes letter chosen into an array to be displayed
+        --remainingGuesses;
+
+        //Displays how many chances users has left before user loses game
+        var counterHtml = document.getElementById("wordCount");
+        counterHtml.innerHTML = "Remaining Guesses: " + remainingGuesses;
+
+        //Displays the letters user guessed that are incorrect
+        var displayedIncorrectLetters = document.getElementById("incorrectLettersGuessed");
+        displayedIncorrectLetters.innerHTML = "Incorrect Letters Guesses: " + incorrectLetters;
+
+        console.log("Letters Guessed: ", incorrectLetters);
+        console.log("Remaining Guesses: ", remainingGuesses);
+    } else {
 
 
-
-			// correctLetters.push(userLetterChoice);
-			// console.log("Correct Letters:", correctLetters);
-
-
+        // correctLetters.push(userLetterChoice);
+        // console.log("Correct Letters:", correctLetters);
+        //chosenWord.splice(a,1, "_");
 
 
-			 console.log("Place Holders: ", placeHolders);
-			 // console.log("chosenWord: ", chosenWord);
-			 console.log("-------");
+        for (var i = 0; i < chosenWord.length; i++) {
+            placeHolders[i] = "_";
+
+            if ((userLetterChoice) === (chosenWord[i])) {
+                placeHolders[i] = chosenWord[i];
+
+            }
+        }
 
 
-		// var displayedHolders = document.getElementById("correctLettersDisplayed");	
-		// displayedHolders.innerHTML = "Your Word: " + placeHolders;
-		// console.log("Place Holders: ", placeHolders);
+        // correctLetters.push(userLetterChoice);
+        // console.log("Correct Letters:", correctLetters);
 
 
-		// var displayedCorrectLetters = document.getElementById("correctLettersGuessed");
-		// displayedCorrectLetters.innerHTML = "Correct Letters Guessed: " +chosenWord;
+        console.log("Place Holders: ", placeHolders);
+        // console.log("chosenWord: ", chosenWord);
+        console.log("-------");
 
-		//displays the correct guesses onto screen
-		// function correctGuesses(arr){
 
-		
-	}
+        // var displayedHolders = document.getElementById("correctLettersDisplayed");
+        // displayedHolders.innerHTML = "Your Word: " + placeHolders;
+        // console.log("Place Holders: ", placeHolders);
 
-	if(remainingGuesses === 0){
-		console.log("Game Over");
-		return;
-	}
 
-	if(chosenWord.length === 0){
-		console.log("You Won");
-		return;
-	}
+        // var displayedCorrectLetters = document.getElementById("correctLettersGuessed");
+        // displayedCorrectLetters.innerHTML = "Correct Letters Guessed: " +chosenWord;
 
+        //displays the correct guesses onto screen
+        // function correctGuesses(arr){
+
+
+    }
+
+    if (remainingGuesses === 0) {
+        console.log("Game Over");
+        return;
+    }
+
+    if (chosenWord.length === 0) {
+        console.log("You Won");
+        return;
+    }
 
 
 //figure out how to do duplicate letters because I'm using index of
@@ -110,7 +118,6 @@ var onkeyup = function(event) {
 //seperate function that returns to me an array and that array contains the duplicate letters that I have 
 //find out how to end game properly 
 //print letters 
-
 
 
 }//end function(event)
